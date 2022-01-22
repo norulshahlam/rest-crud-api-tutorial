@@ -1,7 +1,7 @@
 package com.shah.restcrudapitutorial.model.entity;
 
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;

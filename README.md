@@ -1,5 +1,63 @@
 # REST CRUD API Tutorials - Creating a CRUD application using REST API
 
+## Version 3 - CRUD operations
+
+This were the main function is. We will be doing CRUD operations - create, read, update and delete. We will also apply try-catch for expected errors. Before this let us understand the architecture:
+
+
+`3 tier architecture`
+
+[![Image](./src/main/resources/3-tier-architecture.JPG "Deploying Spring Boot Apps to AWS using Elastic Beanstalk")](https://ipwithease.com/three-tier-architecture-in-application/)
+
+`Layered Architecture`  
+
+[![Image](./src/main/resources/3-layered-architecture.JPG "Deploying Spring Boot Apps to AWS using Elastic Beanstalk")](https://medium.com/java-vault/layered-architecture-b2f4ebe8d587)
+
+
+### Rest Controller
+
+- Implement controller to receive requests and use ResponseEntity() to return different status codes
+- Implement validation such as min character, unique value, 
+- Add validation dependency - javax-validation [HERE](https://www.baeldung.com/javax-validation)
+- Validate using @Valid in controller
+- Retrieve validation message [HERE](https://stackoverflow.com/questions/2751603/how-to-get-error-text-in-controller-from-bindingresult)
+- Diff btwn javax.persistence & javax.validation and how to handle error from each validation [HERE](https://reflectoring.io/bean-validation-with-spring-boot/)
+- Create mock data from [HERE](https://www.mockaroo.com/) 
+
+### Patch method
+
+- How to map random fields [HERE](https://newbedev.com/spring-rest-partial-update-with-patch-method) 
+
+- How to validate patch method using ValidatorFactory
+[HERE](https://stackoverflow.com/questions/56139024/how-to-automatically-add-bean-validation-when-partially-updating-patch-spring-bo) 
+
+- Know that entity having camelCase will mapped into db into under_score eg:
+
+    In Entity: birthDate -> birth_date in Database
+
+- Use exception to throw validation error by means of try-catch
+
+- Implement more fields in Employee to learn pagination
+
+- Structuring Your Code [HERE](https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.structuring-your-code)  
+
+       
+This branch we have made a few bad practics:
+- How messy the response object is,
+- Messy try-catch blocks
+- We didnt handle all related exception, and it is hard to handle all exception as the code will get cluttered
+
+Next lesson we will use @ControllerAdvice to handle ALL exception. This will result in cleaner and manageable code. See you next lesson!
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////
+************************************************************************
+
+
 ## Version 2 - Customize json property
 
 The Jackson JSON toolkit contains a set of Java annotations which you can use to influence how JSON is read into objects, or what JSON is generated from the objects. Click  [HERE](http://tutorials.jenkov.com/java-json/jackson-annotations.html) for more information.
