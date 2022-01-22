@@ -83,16 +83,31 @@ public class EmployeeService {
     }
   }
 
-  public Employee patch(UUID id, @Valid EmployeePatch fields, BindingResult result)
+  public ResponseEntity<Object> patch(UUID id, @Valid EmployeePatch fields, BindingResult result)
       throws IllegalAccessException, InvocationTargetException {
 
     Employee employee = empRepo.findById(id).get();
 
+    if (result.hasErrors()) {
+      List<String> message = new ArrayList<String>();
+      for (Object object : result.getAllErrors()) {
+        FieldError fieldError = (FieldError) object;
+        message.add(fieldError.getDefaultMessage());
+      }
+      return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+    }
+
     BeanUtils.copyProperties(fields, employee, getNullPropertyNames(fields));
     System.out.println(employee);
-    Employee updatedEmployee = empRepo.save(employee);
+    Employee updatedEmployee=null;
+    try {
+       updatedEmployee = empRepo.save(employee);
+      
+    } catch (Exception e) {
+      return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 
-    return updatedEmployee;
+    return new ResponseEntity<Object>(updatedEmployee, HttpStatus.ACCEPTED);
   }
 
   // GET PROPERTY HAVING NULL VALUES

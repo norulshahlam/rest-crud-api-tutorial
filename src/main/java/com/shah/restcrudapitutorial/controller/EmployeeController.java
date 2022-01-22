@@ -54,8 +54,8 @@ public class EmployeeController {
     }
 
     @PatchMapping("/employees/{id}")
-    public ResponseEntity<Employee> patchEmployee(@PathVariable UUID id, @Valid @RequestBody EmployeePatch fields,
+    public ResponseEntity<Object> patchEmployee(@PathVariable UUID id, @Valid @RequestBody EmployeePatch fields,
             BindingResult result) throws IllegalAccessException, InvocationTargetException {
-        return new ResponseEntity<Employee>(employeeService.patch(id, fields, result), HttpStatus.OK);
+        return employeeService.patch(id, fields, result);
     }
 }
