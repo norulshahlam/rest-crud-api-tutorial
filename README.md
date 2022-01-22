@@ -47,6 +47,8 @@ This branch we have made a few bad practics:
 - Messy try-catch blocks
 - We didnt handle all related exception, and it is hard to handle all exception as the code will get cluttered
 
+We also assume that this is web-service where user can enter any field and value so a lot of validation is needed. Know that most of the time it will be web application so most validation will be done in front-end. Something to take note of.
+
 Next lesson we will use @ControllerAdvice to handle ALL exception. This will result in cleaner and manageable code. See you next lesson!
 
 
