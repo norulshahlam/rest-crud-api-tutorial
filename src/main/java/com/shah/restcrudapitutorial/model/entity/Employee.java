@@ -13,6 +13,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Range;
@@ -23,6 +27,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@JsonPropertyOrder({"firstName","lastName"})
 @Builder
 @Data
 @Entity
@@ -48,6 +53,7 @@ public class Employee {
     @Range(min = 21, max = 55, message = "Age must be between 21 and 55")
     private int age;
 
+    @JsonIgnore
     private Double accBalance;
 
     @NotNull(message = "Gender cannot be empty")
@@ -56,6 +62,7 @@ public class Employee {
     @NotNull(message = "Country cannot be empty")
     private String country;
 
+    @JsonProperty("Job Scope")
     private String designation;
 
     @CreationTimestamp

@@ -1,4 +1,51 @@
 # REST CRUD API Tutorials - Creating a CRUD application using REST API
+
+## Version 2 - Customize json property
+
+The Jackson JSON toolkit contains a set of Java annotations which you can use to influence how JSON is read into objects, or what JSON is generated from the objects. Click  [HERE](http://tutorials.jenkov.com/java-json/jackson-annotations.html) for more information.
+
+
+### Arrange your order of json properties
+
+Currently the id is at the bottom. we can bring this up by adding this at class level:  
+
+    @JsonPropertyOrder({"firstName","lastName"})
+    
+From this example, firstName will be at the most top followed by lastName
+
+### Hide json property
+
+You can hide certain property of json. let us hide lastName by this annotation in entity:
+
+    @JsonIgnore
+    private String lastName;
+
+### Creation timestamp
+
+Marks a property as the creation timestamp of the containing entity. The property value will be set to the current VM date exactly once when saving the owning entity for the first time.
+
+    @CreationTimestamp
+    private Date createdAt;
+
+### Rename json property
+
+You can rename your json property name instead of using the vdefault value based on variable name
+
+    @JsonProperty("MyAwesomeFirstName")
+    private String firstName;
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////
+**************************************************************************
+
+
 ## Version 1 - Create DB
 
 ### Diagram flow
