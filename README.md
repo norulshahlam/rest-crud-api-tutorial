@@ -4,7 +4,7 @@
 
 The Jackson JSON toolkit contains a set of Java annotations which you can use to influence how JSON is read into objects, or what JSON is generated from the objects. Click  [HERE](http://tutorials.jenkov.com/java-json/jackson-annotations.html) for more information.
 
-
+ 
 ### Arrange your order of json properties
 
 Currently the id is at the bottom. we can bring this up by adding this at class level:  
