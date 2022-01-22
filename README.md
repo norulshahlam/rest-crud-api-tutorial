@@ -1,5 +1,55 @@
 # REST CRUD API Tutorials - Creating a CRUD application using REST API
 
+ Version 4 - Global exception - @ControllerAdvice
+
+
+`Intro`
+
+    During the software development process, it is inevitable to handle all kinds of exceptions. For me, at least half of the time is spent dealing with all kinds of exceptions, so there will be a lot of try {...} catch {...} finally {...} code blocks in the code, which not only has a lot of redundant code, but also affects the readability of the code.
+
+
+`So what is it?`
+
+    Spring consider exception handling a cross-cutting concern, thus it allows you to handle exceptions separately from the rest of your code. This approach truly does work great with Spring!
+
+    Used for global error handling in the Spring MVC application.It also has full control over the body of the response and the status code.
+
+
+`Types?`
+
+There are 2 types:
+
+1. Custom exception - where u throw yourself if it meets a condition and use GlobalExceptionHandler to handle [HERE](https://stackoverflow.com/questions/67090406/throw-custom-exception-with-spring-data-rest)
+
+        
+2. global exception - where it throwas itself and u handle it using GlobalExceptionHandler
+
+
+`Benefits?`
+
+    No cluttering of your code surrounding with try-catch blocks
+    u can have more meaningful error message
+
+Previously we use try catch to handle exception. Now lets refactor our code by removing all try-catch blocks and use global exception handler!
+
+
+`Maven packaging issues`
+
+If you have issue packaging to jar, click [HERE](https://stackoverflow.com/questions/35394885/lombok-not-compiling-in-maven)
+
+### ******************************************* ###
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////
+************************************************************************
+
+
+
+
 ## Version 3 - CRUD operations
 
 This were the main function is. We will be doing CRUD operations - create, read, update and delete. We will also apply try-catch for expected errors. Before this let us understand the architecture:
@@ -58,6 +108,10 @@ Next lesson we will use @ControllerAdvice to handle ALL exception. This will res
 
 /////////////////////////////////////////////////////////////////////////
 ************************************************************************
+
+
+
+
 
 
 ## Version 2 - Customize json property
