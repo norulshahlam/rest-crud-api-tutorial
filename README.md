@@ -58,7 +58,7 @@ This is to configure how you connect to database. This configuration can be defi
   spring.jpa.hibernate.ddl-auto=create
   spring.jpa.show-sql=true
   spring.sql.init.mode=always
-  server.servlet.context-path=/my-api
+  server.servlet.context-path=/crud-api
 
   spring.jpa.defer-datasource-initialization: true
 
@@ -70,7 +70,11 @@ This test case will be created under repository test folder, for the sake of Pro
 
 ### Step 6 - Start Spring!
 
-Let check our database (thru docker container) to verify if table is created and data added. Make sure the parameters entered is consistent with the variables used during docker creation.
+Start Spring. Ensure there is no error,
+
+### Step 7 - Verify database
+
+Once Spring starts, let's check our database (thru docker container) to verify if table is created and data added. Make sure the parameters entered is consistent with the variables used during docker creation.
 
 `Run mysql in cli using docker`  
 
@@ -90,3 +94,7 @@ Let check our database (thru docker container) to verify if table is created and
 `Stop & remove all running proceses`  
 
     docker rm $(docker ps -a -q) -f
+
+### Step 8 - Verify in Postman / Web browser
+
+  Let's make a controller and sent request to view our pre-populated data.
