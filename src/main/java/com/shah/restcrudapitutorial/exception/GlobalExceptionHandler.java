@@ -108,6 +108,13 @@ public class GlobalExceptionHandler {
                 
         return new ResponseEntity<Object>(messsage, status);
     }
+    // SCHEMA / TABLE NOT FOUND
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> otherException(Exception e) {
+
+        HttpStatus status = HttpStatus.SERVICE_UNAVAILABLE;
+        return new ResponseEntity<Object>("Other errors", status);
+    }
 }
 
 @Data

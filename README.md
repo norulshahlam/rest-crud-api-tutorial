@@ -19,10 +19,10 @@
 
 There are 2 types:
 
-1. Custom exception - where u throw yourself if it meets a condition and use GlobalExceptionHandler to handle [HERE](https://stackoverflow.com/questions/67090406/throw-custom-exception-with-spring-data-rest)
+1. Custom exception - where u throw yourself if it meets your condition and use GlobalExceptionHandler to handle [HERE](https://stackoverflow.com/questions/67090406/throw-custom-exception-with-spring-data-rest)
 
         
-2. global exception - where it throwas itself and u handle it using GlobalExceptionHandler
+2. Global exception - where it throwas itself and u handle it using GlobalExceptionHandler
 
 
 `Benefits?`
@@ -36,6 +36,12 @@ Previously we use try catch to handle exception. Now lets refactor our code by r
 `Maven packaging issues`
 
 If you have issue packaging to jar, click [HERE](https://stackoverflow.com/questions/35394885/lombok-not-compiling-in-maven)
+
+`Objectives`
+
+1. Create global exception handler to handle expected errorr
+2. Create custom exception handler to handle our own error
+3. Create 1 generic error to handle other unexpected errors
 
 ### ******************************************* ###
 
