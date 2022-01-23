@@ -38,24 +38,26 @@ public class EmployeeController {
 
     @GetMapping("/one-employee/{id}")
     public ResponseEntity<OneEmployeeResponse> getAllEmployees(@PathVariable UUID id) {
-
-        try {
-            return new ResponseEntity<OneEmployeeResponse>(employeeService.getOneEmployee(id), HttpStatus.OK);
-        } catch (NoSuchElementException e) {
-            OneEmployeeResponse body = new OneEmployeeResponse(e.getMessage(), null);
-            return new ResponseEntity<OneEmployeeResponse>(body, HttpStatus.NOT_FOUND);
-        }
+            return new ResponseEntity<OneEmployeeResponse>
+            (employeeService.getOneEmployee(id), HttpStatus.OK);
     }
 
     @PostMapping("/create-employee")
-    public ResponseEntity<?> newEmployee(@Valid @RequestBody Employee employee, BindingResult result) {
+    public ResponseEntity<OneEmployeeResponse> newEmployee(@Valid @RequestBody Employee employee, BindingResult result) {
 
-        return employeeService.post(employee, result);
+        return new ResponseEntity<OneEmployeeResponse>(employeeService.post(employee, result),HttpStatus.CREATED);
     }
 
     @PatchMapping("/employees/{id}")
-    public ResponseEntity<Object> patchEmployee(@PathVariable UUID id, @Valid @RequestBody EmployeePatch fields,
+    public ResponseEntity<OneEmployeeResponse> patchEmployee(@PathVariable UUID id, @Valid @RequestBody EmployeePatch fields,
             BindingResult result) throws IllegalAccessException, InvocationTargetException {
-        return employeeService.patch(id, fields, result);
+                return new ResponseEntity<OneEmployeeResponse>( employeeService.patch(id, fields, result), HttpStatus.CREATED);
     }
 }
+/**
+
+   //   // CHECK FOR DUPLICATE EMAIL
+    //   if (empRepo.existsByEmail(employee.getEmail())) {
+    //     return new ResponseEntity<Object>("Email exists. Use another email", HttpStatus.BAD_REQUEST);
+
+ */

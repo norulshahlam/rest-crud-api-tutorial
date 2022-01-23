@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import javax.validation.Valid;
 
+import com.shah.restcrudapitutorial.exception.MyConstraintViolationException;
 import com.shah.restcrudapitutorial.model.entity.Employee;
 import com.shah.restcrudapitutorial.model.request.EmployeePatch;
 import com.shah.restcrudapitutorial.model.response.OneEmployeeResponse;
@@ -18,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -35,7 +37,11 @@ public class EmployeeService {
 
   // GET ALL
   public List<Employee> getAllEmployees() {
-    return empRepo.findAll();
+    final List<Employee> findAll = empRepo.findAll();
+    if (findAll.isEmpty()) {
+      throw new EmptyResultDataAccessException("No employee at all. Please insert some.", 1);
+    }
+    return findAll;
   }
 
   // GET 1
@@ -46,68 +52,36 @@ public class EmployeeService {
   }
 
   // POST
-  public ResponseEntity<?> post(@Valid Employee employee, BindingResult result) {
+  public OneEmployeeResponse post(@Valid Employee employee, BindingResult result) {
 
-    System.out.println(employee);
-
-    // VALIDATE ENTITY
+    // BEFORE IT REACHES DB AND TRIGGER ERROR FOR CONSTRAINTS, WE WILL MANUALLY
+    // TRIGGER IT.
     if (result.hasErrors()) {
-      List<String> message = new ArrayList<String>();
-      for (Object object : result.getAllErrors()) {
-        FieldError fieldError = (FieldError) object;
-        message.add(fieldError.getDefaultMessage());
-      }
-      return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+      throw new MyConstraintViolationException(result);
     }
-    try {
-      // CHECK FOR DUPLICATE EMAIL
-      if (empRepo.existsByEmail(employee.getEmail())) {
-        return new ResponseEntity<Object>("Email exists. Use another email", HttpStatus.BAD_REQUEST);
-      }
-      // OTHER ERRORS
-    } catch (Exception e) {
-      return new ResponseEntity<Object>(e.getMessage(),
-          HttpStatus.SERVICE_UNAVAILABLE);
-    }
+    // // CHECK FOR DUPLICATE EMAIL
+    // if (empRepo.existsByEmail(employee.getEmail())) {
+    // return new ResponseEntity<Object>("Email exists. Use another email",
+    // HttpStatus.BAD_REQUEST);
 
-    // ID & DATE CREEATED IS MANAGED BY JPA. IN CASE USER SETS THIS, REMOVE IT.
+    // ID & DATE CREATED IS MANAGED BY JPA. IN CASE USER SETS THIS, REMOVE IT.
     employee.setId(null);
     employee.setCreatedAt(null);
 
-    // IN CASE THERE'S ERROR IN CREATING NEW RESOURCES
-    try {
-      return new ResponseEntity<Object>(empRepo.save(employee), HttpStatus.CREATED);
-    } catch (Exception e) {
-      System.out.println(e);
-      return new ResponseEntity<Object>(e.getLocalizedMessage(), HttpStatus.SERVICE_UNAVAILABLE);
-    }
+    return new OneEmployeeResponse("Employee created!", empRepo.save(employee));
   }
 
-  public ResponseEntity<Object> patch(UUID id, @Valid EmployeePatch fields, BindingResult result)
+  // PATCH
+  public OneEmployeeResponse patch(UUID id, @Valid EmployeePatch fields, BindingResult result)
       throws IllegalAccessException, InvocationTargetException {
 
     Employee employee = empRepo.findById(id).get();
-
+    // BEFORE IT REACHES DB AND TRIGGER ERROR FOR CONSTRAINTS, WE WILL MANUALLY  TRIGGER IT.
     if (result.hasErrors()) {
-      List<String> message = new ArrayList<String>();
-      for (Object object : result.getAllErrors()) {
-        FieldError fieldError = (FieldError) object;
-        message.add(fieldError.getDefaultMessage());
-      }
-      return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+      throw new MyConstraintViolationException(result);
     }
-
     BeanUtils.copyProperties(fields, employee, getNullPropertyNames(fields));
-    System.out.println(employee);
-    Employee updatedEmployee=null;
-    try {
-       updatedEmployee = empRepo.save(employee);
-      
-    } catch (Exception e) {
-      return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
-    return new ResponseEntity<Object>(updatedEmployee, HttpStatus.ACCEPTED);
+    return new OneEmployeeResponse("Employee updated!", empRepo.save(employee));
   }
 
   // GET PROPERTY HAVING NULL VALUES
