@@ -12,6 +12,7 @@ import com.shah.restcrudapitutorial.model.FieldCount;
 import com.shah.restcrudapitutorial.model.entity.Employee;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +24,7 @@ public class EmployeeRepositoryTest {
   private EmployeeRepository employeeRepository;
 
   @Test
+  @Order(1)
   public void addEmployee() {
 
     Employee employee1 = Employee.builder().email(randomString() + "@email.com").firstName(randomString()).lastName(randomString()).gender("male").age(randomInt()).country("Singapore").birthDate(new Date(1987 - 03 - 29)).build();
@@ -59,7 +61,7 @@ public class EmployeeRepositoryTest {
 	}
 
 
-  
+
   private int randomInt() {
     return ThreadLocalRandom.current().nextInt(21, 55 + 1);
   }

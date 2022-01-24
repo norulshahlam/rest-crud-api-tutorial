@@ -69,6 +69,11 @@ To test repository, we can run the query against H2 database simply we dont want
 Now lets create a unit test for this!
 
 
+`Create test case`
+
+Simply right-click on the repo file -> new -> Junit. This will automatically generate test method. We will implement our test cases. 
+
+
 
 
 
