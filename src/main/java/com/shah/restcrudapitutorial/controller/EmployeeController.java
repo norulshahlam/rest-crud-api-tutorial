@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,11 +49,17 @@ public class EmployeeController {
         return new ResponseEntity<OneEmployeeResponse>(employeeService.post(employee, result),HttpStatus.CREATED);
     }
 
-    @PatchMapping("/employees/{id}")
+    @PatchMapping("/employee/{id}")
     public ResponseEntity<OneEmployeeResponse> patchEmployee(@PathVariable UUID id, @Valid @RequestBody EmployeePatch fields,
             BindingResult result) throws IllegalAccessException, InvocationTargetException {
                 return new ResponseEntity<OneEmployeeResponse>( employeeService.patch(id, fields, result), HttpStatus.CREATED);
     }
+
+    
+	@DeleteMapping("/employee/{id}")
+	public ResponseEntity<?> deleteEmployee(@PathVariable UUID id) {
+		return new ResponseEntity<Object>(employeeService.deleteEmployee(id), HttpStatus.OK);
+	}
     
     // COUNT NUMBER OF EACH COUNTRY PRESENT
 	@GetMapping("/employees/count/country")

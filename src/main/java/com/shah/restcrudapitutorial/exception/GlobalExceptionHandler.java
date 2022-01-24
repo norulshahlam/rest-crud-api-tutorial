@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<Object>(messsage, notFound);
     }
 
-    // ID NOT FOUND
+    // ID NOT FOUND DURING GET OR DELETE
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<?> handleNoSuchElementException(HttpServletRequest r, NoSuchElementException s) {
 

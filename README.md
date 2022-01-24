@@ -74,6 +74,26 @@ Now lets create a unit test for this!
 Simply right-click on the repo file -> new -> Junit. This will automatically generate test method. We will implement our test cases. 
 
 
+### Unit Test - Service layer
+
+Hardest unit to test.
+
+`Using Mock`
+
+Since our repo is tested and works fine, we dont need to test the service class against repo but instead we will mock it. Basically we don't want to test the real repository when we are testing the service because we know that repository is tested and it works. So we can just mock its implementation inside of the service test.
+The benefit that we get is that our unit test is now testing is fast as we don't have to bring up the database, create table, insert a new student, drop the database, and all of that stuff that you've seen when we tested the repository which we've done earlier. Therefore anywhere that we use the repository we just `mock` it. 
+
+[![Image](./src/main/resources/unit-test-service.JPG "Deploying Spring Boot Apps to AWS using Elastic Beanstalk")](https://www.tutorialspoint.com/mockito/mockito_junit_integration.htm)
+
+Besides mocking the repository, we can mock basically anything and define what it reutrn, making our work easier and faster [(more info)](https://visitmehere.wordpress.com/2019/06/07/mock-an-arraylist/). We also implement @InjectMocks simply because Service layer need Repository layer [(more info)](https://stackoverflow.com/questions/16467685/difference-between-mock-and-injectmocks).
+
+`IMPORTANT NOTE`
+
+You dont need to create any real objects at all. Just create mock of any instance, method, class, anything. The goal of unit test is to detaach any real object as much as possible!
+
+
+
+
 
 
 

@@ -2,7 +2,6 @@ package com.shah.restcrudapitutorial.service;
 
 import java.beans.FeatureDescriptor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -24,7 +23,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 
 import lombok.AllArgsConstructor;
 
@@ -66,7 +64,6 @@ public class EmployeeService {
     return new OneEmployeeResponse("Employee created!", empRepo.save(employee));
   }
 
-
   // PATCH
   public OneEmployeeResponse patch(UUID id, @Valid EmployeePatch fields, BindingResult result)
       throws IllegalAccessException, InvocationTargetException {
@@ -80,6 +77,11 @@ public class EmployeeService {
     return new OneEmployeeResponse("Employee updated!", empRepo.save(employee));
   }
 
+  // DELETE
+	public String deleteEmployee(UUID id) {
+		empRepo.deleteById(id);
+		return "User with ID " + id + " deleted!";
+	}
   
 	public ResponseEntity<?> getAllCountryCount() {
 		return new ResponseEntity<Object>(empRepo.getAllCountryCount(), HttpStatus.OK);
