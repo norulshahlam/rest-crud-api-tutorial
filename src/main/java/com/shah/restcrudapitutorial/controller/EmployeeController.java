@@ -53,11 +53,16 @@ public class EmployeeController {
             BindingResult result) throws IllegalAccessException, InvocationTargetException {
                 return new ResponseEntity<OneEmployeeResponse>( employeeService.patch(id, fields, result), HttpStatus.CREATED);
     }
+    
+    // COUNT NUMBER OF EACH COUNTRY PRESENT
+	@GetMapping("/employees/count/country")
+	public ResponseEntity<?> getAllCountryCount() {
+		return employeeService.getAllCountryCount();
+	}
+
+    // COUNT NUMBER OF A COUNTRY
+	@GetMapping("/employees/count/{field}")
+	public ResponseEntity<?> getCountryCount(@PathVariable String field) {
+		return employeeService.getCountryCount(field);
+	}
 }
-/**
-
-   //   // CHECK FOR DUPLICATE EMAIL
-    //   if (empRepo.existsByEmail(employee.getEmail())) {
-    //     return new ResponseEntity<Object>("Email exists. Use another email", HttpStatus.BAD_REQUEST);
-
- */

@@ -54,22 +54,18 @@ public class EmployeeService {
   // POST
   public OneEmployeeResponse post(@Valid Employee employee, BindingResult result) {
 
-    // BEFORE IT REACHES DB AND TRIGGER ERROR FOR CONSTRAINTS, WE WILL MANUALLY
-    // TRIGGER IT.
+    // BEFORE IT REACHES DB AND TRIGGER ERROR FOR CONSTRAINTS, WE WILL MANUALLY TRIGGER IT.
     if (result.hasErrors()) {
       throw new MyConstraintViolationException(result);
     }
-    // // CHECK FOR DUPLICATE EMAIL
-    // if (empRepo.existsByEmail(employee.getEmail())) {
-    // return new ResponseEntity<Object>("Email exists. Use another email",
-    // HttpStatus.BAD_REQUEST);
-
+  
     // ID & DATE CREATED IS MANAGED BY JPA. IN CASE USER SETS THIS, REMOVE IT.
     employee.setId(null);
     employee.setCreatedAt(null);
 
     return new OneEmployeeResponse("Employee created!", empRepo.save(employee));
   }
+
 
   // PATCH
   public OneEmployeeResponse patch(UUID id, @Valid EmployeePatch fields, BindingResult result)
@@ -83,6 +79,15 @@ public class EmployeeService {
     BeanUtils.copyProperties(fields, employee, getNullPropertyNames(fields));
     return new OneEmployeeResponse("Employee updated!", empRepo.save(employee));
   }
+
+  
+	public ResponseEntity<?> getAllCountryCount() {
+		return new ResponseEntity<Object>(empRepo.getAllCountryCount(), HttpStatus.OK);
+	}
+
+	public ResponseEntity<?> getCountryCount(String field) {
+		return new ResponseEntity<Object>(empRepo.getCountryCount(field), HttpStatus.OK);
+	}
 
   // GET PROPERTY HAVING NULL VALUES
   public static String[] getNullPropertyNames(Object source) {

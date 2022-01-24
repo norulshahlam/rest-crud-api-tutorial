@@ -1,6 +1,92 @@
 # REST CRUD API Tutorials - Creating a CRUD application using REST API
 
- Version 4 - Global exception - @ControllerAdvice
+## Version 4 - Global exception - @ControllerAdvice
+
+`Introduction`
+
+
+Unit test refers to the test of the most basic parts of an app -> A Unit. For REST application, we create test cases starting from Repository layer, then Service layer, then Controller where the test focus on integrating different layers of the application.
+
+
+`Dependencies for testing`
+
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <scope>test</scope>
+        <exclusions>
+            <exclusion>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-library</artifactId>
+        <scope>test</scope>
+    </dependency>   
+
+also add dependency for h2:
+    
+    <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <scope>test</scope>
+    </dependency>
+
+
+### Unit Test - Repository
+
+`Diagram`
+
+[![Image](./src/main/resources/unit-test-repository.JPG "Deploying Spring Boot Apps to AWS using Elastic Beanstalk")](https://ipwithease.com/three-tier-architecture-in-application/)
+
+- In Repository, we dont need to test build-in methods of JPA. Only test your custom methods [(Explanation)](https://youtu.be/Geq60OVyBPg?t=2422)
+
+- Since we dont have one, lets create one [(using @Query)](https://stackoverflow.com/questions/58453768/variables-in-spring-data-jpa-native-query)
+
+- This query will count number of country in employee table
+
+- The result will have custom fields [(using projection)](https://stackoverflow.com/questions/46083329/no-converter-found-capable-of-converting-from-type-to-type) 
+
+Run http to test:  
+
+Number of each country
+
+    http://localhost:9090/crud-api/employees/count/country
+
+Number of a country
+
+    http://localhost:9090/crud-api/employees/count/singapore
+
+
+`H2 database`
+
+To test repository, we can run the query against H2 database simply we dont want to store the data during testing. This can be easily done by copy-paste our main application.properties into the test folder and change the db url from mysql to h2. Schema and data will be loaded from the main resources
+
+Now lets create a unit test for this!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**********************************************************************
 
 
 `Intro`
