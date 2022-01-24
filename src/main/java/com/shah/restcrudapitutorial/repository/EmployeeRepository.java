@@ -17,7 +17,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
 	List<FieldCount> getAllCountryCount();
   
 	@Query(value = "SELECT DISTINCT country as country, COUNT(*) as count FROM employee where country=?1 GROUP BY country", nativeQuery = true)
-	List<CountryCount> getCountryCount(String country);
+	List<CountryCount> getOneCountryCount(String country);
 
 }
 //  select distinct country as country, count(*) as count from employee where country="japan" group by country;

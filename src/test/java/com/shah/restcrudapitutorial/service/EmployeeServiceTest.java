@@ -93,7 +93,7 @@ public class EmployeeServiceTest {
 
   @Disabled
   @Test
-  void testGetCountryCount() {
+  void testGetOneCountryCount() {
 
   }
 

@@ -38,7 +38,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/one-employee/{id}")
-    public ResponseEntity<OneEmployeeResponse> getAllEmployees(@PathVariable UUID id) {
+    public ResponseEntity<OneEmployeeResponse> getOneEmployee(@PathVariable UUID id) {
             return new ResponseEntity<OneEmployeeResponse>
             (employeeService.getOneEmployee(id), HttpStatus.OK);
     }
@@ -69,7 +69,7 @@ public class EmployeeController {
 
     // COUNT NUMBER OF A COUNTRY
 	@GetMapping("/employees/count/{field}")
-	public ResponseEntity<?> getCountryCount(@PathVariable String field) {
-		return employeeService.getCountryCount(field);
+	public ResponseEntity<?> getOneCountryCount(@PathVariable String field) {
+		return employeeService.getOneCountryCount(field);
 	}
 }

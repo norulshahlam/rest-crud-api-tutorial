@@ -87,8 +87,8 @@ public class EmployeeService {
 		return new ResponseEntity<Object>(empRepo.getAllCountryCount(), HttpStatus.OK);
 	}
 
-	public ResponseEntity<?> getCountryCount(String field) {
-		return new ResponseEntity<Object>(empRepo.getCountryCount(field), HttpStatus.OK);
+	public ResponseEntity<?> getOneCountryCount(String field) {
+		return new ResponseEntity<Object>(empRepo.getOneCountryCount(field), HttpStatus.OK);
 	}
 
   // GET PROPERTY HAVING NULL VALUES
