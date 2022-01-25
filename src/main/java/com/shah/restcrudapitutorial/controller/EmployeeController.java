@@ -2,7 +2,6 @@ package com.shah.restcrudapitutorial.controller;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import javax.validation.Valid;

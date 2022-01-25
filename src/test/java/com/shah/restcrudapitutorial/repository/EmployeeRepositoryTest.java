@@ -1,14 +1,13 @@
 package com.shah.restcrudapitutorial.repository;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.sql.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.isA;
 
 import com.shah.restcrudapitutorial.model.CountryCount;
-import com.shah.restcrudapitutorial.model.FieldCount;
 import com.shah.restcrudapitutorial.model.entity.Employee;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -52,7 +51,7 @@ public class EmployeeRepositoryTest {
   @Test
 	void testGetCountryCount() {
 		final String JAPAN = "Japan";
-		List<CountryCount> expected = employeeRepository.getCountryCount(JAPAN);
+		List<CountryCount> expected = employeeRepository.getOneCountryCount(JAPAN);
 
 		// JAPAN WILL HAVE A COUNT OF 3
 		long count = expected.stream().map(e -> e.getCount()).count();
