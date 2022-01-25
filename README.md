@@ -92,7 +92,6 @@ Besides mocking the repository, we can mock basically anything and define what i
 You dont need to create any real objects at all. Just create mock of any instance, method, class, anything. The goal of testing the service is to detach any real object as much as possible!
 
 
-
 ### Unit Test - Controller layer
 
 Unlike the Service layeer where we can mock everything, here we need to use real object for the response. From there we will use JSONPath to match certain fields in your result set. If you are not familiar with it, you can use  [(JSONPath Online Evaluator)](https://jsonpath.com/) to play around with the expressions.
