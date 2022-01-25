@@ -95,7 +95,7 @@ You dont need to create any real objects at all. Just create mock of any instanc
 
 ### Unit Test - Controller layer
 
-Using JSONPath to match certain fields in your result set. [(More info)](https://jsonpath.com/)
+Unlike the Service layeer where we can mock everything, here we need to use real object for the response. From there we will use JSONPath to match certain fields in your result set. If you are not familiar with it, you can use  [(JSONPath Online Evaluator)](https://jsonpath.com/) to play around with the expressions.
 
 
 
