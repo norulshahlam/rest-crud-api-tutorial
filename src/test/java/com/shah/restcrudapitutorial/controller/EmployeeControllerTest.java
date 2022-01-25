@@ -89,7 +89,7 @@ System.out.println(oneEmployeeResponse);
       .contentType(MediaType.APPLICATION_JSON))
       .andDo(print())
       .andExpect(status().isOk())
-      .andExpect(jsonPath("$.getEmployee.getEmail")
+      .andExpect(jsonPath("$.employee.email")
         .value(email));
   }
 
