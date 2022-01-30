@@ -40,9 +40,7 @@ public class EmployeeControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
-
   private BindingResult result;
-
   private ObjectMapper objectMapper = new ObjectMapper();
 
   @MockBean
