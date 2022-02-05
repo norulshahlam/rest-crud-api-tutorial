@@ -7,8 +7,21 @@
 
 Unit test refers to the test of the most basic parts of an app -> A Unit. For REST application, we create test cases starting from Repository layer, then Service layer, then Controller where the test focus on integrating different layers of the application.
 
+`Code Coverage`
 
-`Dependencies for testing``
+Code coverage describes the percentage of code covered by automated tests. in Eclipse we use [(EclEmma)](https://www.eclemma.org/) which is a free Java code coverage tool for Eclipse. Coverage is measured by percentage. Especially when working in enterprise, we must achieve atleast 50% total coverage
+
+![Image](./src/main/resources/code-coverage.JPG "Deploying Spring Boot Apps to AWS using Elastic Beanstalk")
+
+To achieve a high % coverage, we need to test elements that has highest number of instruction. Also, to cover your service class is highest priority. 
+
+`Code Quality`
+
+[(SonarLint)](https://www.sonarlint.org/) is a Free and Open Source IDE extension that identifies and helps you fix quality and security issues as you code. Like a spell checker, SonarLint squiggles flaws and provides real-time feedback and clear remediation guidance to deliver clean code from the get-go.
+
+
+`Dependencies for testing`
+
 
     <dependency>
         <groupId>junit</groupId>

@@ -7,5 +7,8 @@ import lombok.AllArgsConstructor;
 // CUSTOM EXCEPTION 
 @AllArgsConstructor
 public class MyConstraintViolationException extends RuntimeException {
-    BindingResult result;
+    
+	private static final long serialVersionUID = -4197133332567581277L;
+	
+	BindingResult result;
 }

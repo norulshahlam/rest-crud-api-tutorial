@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
+import com.shah.restcrudapitutorial.model.CountryCount;
 import com.shah.restcrudapitutorial.model.entity.Employee;
 import com.shah.restcrudapitutorial.model.request.EmployeePatch;
 import com.shah.restcrudapitutorial.model.response.OneEmployeeResponse;
@@ -60,15 +61,18 @@ public class EmployeeController {
 		return new ResponseEntity<Object>(employeeService.deleteEmployee(id), HttpStatus.OK);
 	}
     
+	
     // COUNT NUMBER OF EACH COUNTRY PRESENT
-	@GetMapping("/employees/count/country")
-	public ResponseEntity<?> getAllCountryCount() {
-		return employeeService.getAllCountryCount();
+	@GetMapping("/employees/count/countries")
+	public ResponseEntity<Object> getAllCountryCount() {
+		return new ResponseEntity<>(employeeService.getAllCountryCount(), HttpStatus.FOUND);
 	}
 
+	
     // COUNT NUMBER OF A COUNTRY
 	@GetMapping("/employees/count/{field}")
-	public ResponseEntity<?> getOneCountryCount(@PathVariable String field) {
-		return employeeService.getOneCountryCount(field);
+	public ResponseEntity<List<CountryCount>> getOneCountryCount(@PathVariable String field) {
+		return new ResponseEntity<>(employeeService.getOneCountryCount(field), HttpStatus.FOUND);
 	}
+	
 }
