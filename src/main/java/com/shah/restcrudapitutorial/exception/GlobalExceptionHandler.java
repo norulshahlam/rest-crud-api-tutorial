@@ -26,11 +26,11 @@ public class GlobalExceptionHandler {
     // EMPTY RESULT
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public ResponseEntity<?> handleEmptyResultDataAccessException(HttpServletRequest r,
-            EmptyResultDataAccessException s) {
+            EmptyResultDataAccessException error) {
 
         HttpStatus notFound = HttpStatus.NOT_FOUND;
 
-        Message messsage = new Message(s.getLocalizedMessage(), 
+        Message messsage = new Message(error.getLocalizedMessage(), 
                 notFound, 
                 r.getRequestURI(), 
                 r.getMethod(),
@@ -75,7 +75,7 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<Object>(messsages, status);
     }
-
+ 
     // ERROR OCCUR WHEN WRITING TO DB DUE TO CONSTRAINT
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<?> myDataIntegrityViolationException(HttpServletRequest r,
