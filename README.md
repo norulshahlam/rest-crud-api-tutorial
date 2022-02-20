@@ -1,5 +1,45 @@
 # REST CRUD API Tutorials - Creating a CRUD application using REST API
 
+## Version 6 - Swagger
+
+Swagger2 is an open source project used to generate the REST API documents for RESTful web services. It provides a user interface to access our RESTful web services via the web browser.
+
+To enable the Swagger2 in Spring Boot application, you need to add the following dependencies in our build configurations file:
+
+
+    <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger2</artifactId>
+        <version>2.9.2</version>
+    </dependency>
+
+    <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger-ui</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+
+`Swagger config`
+
+You just need to have one class for this config and you will do all the necessary configurations there. Click [here](https://stackoverflow.com/questions/70043841/swagger-2-issue-spring-boot) for any issues faced.
+    
+
+`application.properties`
+
+    spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+
+`Accessing Swagger`
+
+You can access it in JSON-based or UI-based. These two have their default url. You can, of course customize this.
+
+JSON-based
+
+    http://localhost:9090/v2/api-docs
+
+UI-based
+
+    http://localhost:9090/swagger-ui.html
+
 ## Version 5 - Unit Testing
 
 `Introduction`
