@@ -1,6 +1,5 @@
 package com.shah.restcrudapitutorial.controller;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,31 +33,31 @@ public class EmployeeController {
 
     @GetMapping("/all-employees")
     public ResponseEntity<List<Employee>> getAllEmployees() {
-        return new ResponseEntity<List<Employee>>(employeeService.getAllEmployees(), HttpStatus.OK);
+        return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
     }
 
     @GetMapping("/one-employee/{id}")
     public ResponseEntity<OneEmployeeResponse> getOneEmployee(@PathVariable UUID id) {
-            return new ResponseEntity<OneEmployeeResponse>
+            return new ResponseEntity<>
             (employeeService.getOneEmployee(id), HttpStatus.OK);
     }
  
     @PostMapping("/create-employee")
     public ResponseEntity<OneEmployeeResponse> newEmployee(@Valid @RequestBody Employee employee, BindingResult result) {
 
-        return new ResponseEntity<OneEmployeeResponse>(employeeService.post(employee, result),HttpStatus.CREATED);
+        return new ResponseEntity<>(employeeService.post(employee, result),HttpStatus.CREATED);
     }
 
     @PatchMapping("/employee/{id}")
     public ResponseEntity<OneEmployeeResponse> patchEmployee(@PathVariable UUID id, @Valid @RequestBody EmployeePatch fields,
-            BindingResult result) throws IllegalAccessException, InvocationTargetException {
-                return new ResponseEntity<OneEmployeeResponse>( employeeService.patch(id, fields, result), HttpStatus.CREATED);
+            BindingResult result) {
+                return new ResponseEntity<>( employeeService.patch(id, fields, result), HttpStatus.CREATED);
     }
 
     
 	@DeleteMapping("/employee/{id}")
-	public ResponseEntity<?> deleteEmployee(@PathVariable UUID id) {
-		return new ResponseEntity<Object>(employeeService.deleteEmployee(id), HttpStatus.OK);
+	public ResponseEntity<Object> deleteEmployee(@PathVariable UUID id) {
+		return new ResponseEntity<>(employeeService.deleteEmployee(id), HttpStatus.OK);
 	}
     
 	

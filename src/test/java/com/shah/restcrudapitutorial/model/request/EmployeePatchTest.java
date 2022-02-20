@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class EmployeePatchPatchTest {
 
 	@Test
-	public void testObjectMethod() {
+	void testObjectMethod() {
 		EmployeePatch object = new EmployeePatch();
 		object.equals(new EmployeePatch());
 		object.hashCode();
@@ -15,7 +15,7 @@ class EmployeePatchPatchTest {
 	}
 	
 	@Test
-	public void testAll() {
+	void testAll() {
 		EmployeePatch object = new EmployeePatch();
 		object.equals(EmployeePatch.builder().build());
 		assertThat(object).isNotNull();

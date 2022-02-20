@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 
     // EMPTY RESULT
     @ExceptionHandler(EmptyResultDataAccessException.class)
-    public ResponseEntity<?> handleEmptyResultDataAccessException(HttpServletRequest r,
+    public ResponseEntity<Object> handleEmptyResultDataAccessException(HttpServletRequest r,
             EmptyResultDataAccessException error) {
 
         HttpStatus notFound = HttpStatus.NOT_FOUND;
@@ -36,12 +36,12 @@ public class GlobalExceptionHandler {
                 r.getMethod(),
                 ZoneId.systemDefault(), 
                 ZonedDateTime.now(ZoneId.systemDefault()));
-        return new ResponseEntity<Object>(messsage, notFound);
+        return new ResponseEntity<>(messsage, notFound);
     }
 
     // ID NOT FOUND DURING GET OR DELETE
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<?> handleNoSuchElementException(HttpServletRequest r, NoSuchElementException s) {
+    public ResponseEntity<Object> handleNoSuchElementException(HttpServletRequest r, NoSuchElementException s) {
 
         HttpStatus notFound = HttpStatus.NOT_FOUND;
 
@@ -52,33 +52,33 @@ public class GlobalExceptionHandler {
                 ZoneId.systemDefault(), 
                 ZonedDateTime.now(ZoneId.systemDefault()));
 
-        return new ResponseEntity<Object>(messsage, notFound);
+        return new ResponseEntity<>(messsage, notFound);
     }
 
     
     // HIBERNATE VALIDATION FAILED DURING RESOURCE CREATION
     @ExceptionHandler(MyConstraintViolationException.class)
-    public ResponseEntity<?> myConstraintViolationException(MyConstraintViolationException e, HttpServletRequest r) {
+    public ResponseEntity<Object> myConstraintViolationException(MyConstraintViolationException e, HttpServletRequest r) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
-        List<String> messageArray = new ArrayList<String>();
+        List<String> messages = new ArrayList<>();
         for (Object object : e.result.getAllErrors()) {
             FieldError fieldError = (FieldError) object;
-            messageArray.add(fieldError.getDefaultMessage());
+            messages.add(fieldError.getDefaultMessage());
         }
-        Messages messsages = new Messages(messageArray, 
+        Messages messsages = new Messages(messages, 
                 status, 
                 r.getRequestURI(), 
                 r.getMethod(),
                 ZoneId.systemDefault(), 
                 ZonedDateTime.now(ZoneId.systemDefault()));
 
-        return new ResponseEntity<Object>(messsages, status);
+        return new ResponseEntity<>(messsages, status);
     }
  
     // ERROR OCCUR WHEN WRITING TO DB DUE TO CONSTRAINT
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<?> myDataIntegrityViolationException(HttpServletRequest r,
+    public ResponseEntity<Object> myDataIntegrityViolationException(HttpServletRequest r,
             DataIntegrityViolationException e) {
 
         HttpStatus status = HttpStatus.BAD_GATEWAY;
@@ -89,12 +89,12 @@ public class GlobalExceptionHandler {
                 r.getMethod(),
                 ZoneId.systemDefault(), 
                 ZonedDateTime.now(ZoneId.systemDefault()));
-        return new ResponseEntity<Object>(messsage, status);
+        return new ResponseEntity<>(messsage, status);
     }
 
     // SCHEMA / TABLE NOT FOUND
     @ExceptionHandler(InvalidDataAccessResourceUsageException.class)
-    public ResponseEntity<?> myInvalidDataAccessResourceUsageException(HttpServletRequest r,
+    public ResponseEntity<Object> myInvalidDataAccessResourceUsageException(HttpServletRequest r,
             InvalidDataAccessResourceUsageException s) {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
@@ -106,21 +106,21 @@ public class GlobalExceptionHandler {
                 ZoneId.systemDefault(),
                 ZonedDateTime.now(ZoneId.systemDefault()));
                 
-        return new ResponseEntity<Object>(messsage, status);
+        return new ResponseEntity<>(messsage, status);
     }
     // OTHER UNEXPECTED ERRORS
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> otherException(Exception e) {
+    public ResponseEntity<Object> otherException(Exception e) {
 
         HttpStatus status = HttpStatus.SERVICE_UNAVAILABLE;
-        return new ResponseEntity<Object>(e.getMessage(), status);
+        return new ResponseEntity<>(e.getMessage(), status);
     }
 }
 
 @Data
 @AllArgsConstructor
 class Message {
-    private final String message;
+    private final String description;
     private final HttpStatus status;
     private final String path;
     private final String method;
@@ -131,7 +131,7 @@ class Message {
 @Data
 @AllArgsConstructor
 class Messages {
-    private final List<String> message;
+    private final List<String> messageList;
     private final HttpStatus status;
     private final String path;
     private final String method;

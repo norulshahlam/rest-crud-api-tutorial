@@ -1,7 +1,6 @@
 package com.shah.restcrudapitutorial.service;
 
 import java.beans.FeatureDescriptor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -21,8 +20,6 @@ import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
@@ -69,7 +66,7 @@ public class EmployeeService {
 
 	// PATCH
 	public OneEmployeeResponse patch(UUID id, @Valid EmployeePatch fields, BindingResult result)
-			throws IllegalAccessException, InvocationTargetException {
+			 {
 		// BEFORE IT REACHES DB AND TRIGGER ERROR FOR CONSTRAINTS, WE WILL MANUALLY
 		// TRIGGER IT.
 		if (result.hasErrors()) {

@@ -17,14 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class EmployeeRepositoryTest {
+class EmployeeRepositoryTest {
 
   @Autowired
   private EmployeeRepository employeeRepository;
 
   @Test
   @Order(1)
-  public void addEmployee() {
+  void addEmployee() {
 
     Employee employee1 = Employee.builder().email(randomString() + "@email.com").firstName(randomString()).lastName(randomString()).gender("male").age(randomInt()).country("Singapore").birthDate(new Date(1987 - 03 - 29)).build();
 
@@ -56,7 +56,7 @@ public class EmployeeRepositoryTest {
 		// JAPAN WILL HAVE A COUNT OF 3
 		long count = expected.stream().map(e -> e.getCount()).count();
 
-		assertThat(count).isGreaterThan(0);
+		assertThat(count).isPositive();
 	}
 
 

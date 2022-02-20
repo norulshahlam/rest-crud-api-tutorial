@@ -10,5 +10,5 @@ public class MyConstraintViolationException extends RuntimeException {
     
 	private static final long serialVersionUID = -4197133332567581277L;
 	
-	BindingResult result;
+	final BindingResult result;
 }

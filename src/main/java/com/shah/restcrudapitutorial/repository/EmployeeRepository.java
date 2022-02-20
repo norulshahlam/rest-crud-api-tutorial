@@ -20,4 +20,3 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
 	List<CountryCount> getOneCountryCount(String country);
 
 }
-//  select distinct country as country, count(*) as count from employee where country="japan" group by country;

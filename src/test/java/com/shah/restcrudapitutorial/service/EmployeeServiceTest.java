@@ -1,7 +1,6 @@
 package com.shah.restcrudapitutorial.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -22,7 +21,6 @@ import com.shah.restcrudapitutorial.model.response.OneEmployeeResponse;
 import com.shah.restcrudapitutorial.repository.EmployeeRepository;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -32,7 +30,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.validation.BindingResult;
 
 @ExtendWith(MockitoExtension.class)
-public class EmployeeServiceTest {
+class EmployeeServiceTest {
 
 	@Mock
 	private EmployeeRepository employeeRepository;

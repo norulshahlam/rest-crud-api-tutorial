@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shah.restcrudapitutorial.model.entity.Employee;
 import com.shah.restcrudapitutorial.model.response.OneEmployeeResponse;
@@ -24,8 +23,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -36,11 +33,10 @@ import org.springframework.validation.BindingResult;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 
 @WebMvcTest(EmployeeController.class)
-public class EmployeeControllerTest {
+class EmployeeControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
-  private BindingResult result;
   private ObjectMapper objectMapper = new ObjectMapper();
 
   @MockBean
