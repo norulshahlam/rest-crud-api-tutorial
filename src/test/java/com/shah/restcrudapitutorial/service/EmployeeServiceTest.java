@@ -15,6 +15,7 @@ import java.util.UUID;
 import com.shah.restcrudapitutorial.exception.MyConstraintViolationException;
 import com.shah.restcrudapitutorial.model.CountryCount;
 import com.shah.restcrudapitutorial.model.FieldCount;
+import com.shah.restcrudapitutorial.model.dto.EmployeeDto;
 import com.shah.restcrudapitutorial.model.entity.Employee;
 import com.shah.restcrudapitutorial.model.request.EmployeePatch;
 import com.shah.restcrudapitutorial.model.response.OneEmployeeResponse;
@@ -55,6 +56,9 @@ class EmployeeServiceTest {
 
 	@Mock
 	private List<CountryCount> oneCountryCount;
+	
+	@Mock
+	private EmployeeDto employeeDto;
 
 	@BeforeEach
 	void setUp() {
@@ -86,7 +90,7 @@ class EmployeeServiceTest {
 	void testPostValidationPass() {
 		when(result.hasErrors()).thenReturn(false);
 		when(employeeRepository.save(any())).thenReturn(employee);
-		OneEmployeeResponse post = employeeService.post(employee, result);
+		OneEmployeeResponse post = employeeService.post(employeeDto, result);
 		assertThat(post.getEmployee()).isNotNull();
 	}
 
@@ -94,7 +98,7 @@ class EmployeeServiceTest {
 	void testPostValidationFailed() {
 		when(result.hasErrors()).thenReturn(true);
 		assertThrows(MyConstraintViolationException.class, () -> {
-			employeeService.post(employee, result);
+			employeeService.post(employeeDto, result);
 		});
 	}
 

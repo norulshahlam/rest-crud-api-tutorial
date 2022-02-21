@@ -15,6 +15,7 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shah.restcrudapitutorial.model.dto.EmployeeDto;
 import com.shah.restcrudapitutorial.model.entity.Employee;
 import com.shah.restcrudapitutorial.model.response.OneEmployeeResponse;
 import com.shah.restcrudapitutorial.service.EmployeeService;
@@ -99,7 +100,7 @@ class EmployeeControllerTest {
   @Test
   void testNewEmployee() throws Exception {
 
-    when(employeeService.post(any(Employee.class), any(BindingResult.class)))
+    when(employeeService.post(any(EmployeeDto.class), any(BindingResult.class)))
         .thenReturn(oneEmployeeResponse);
         String content = objectMapper.writeValueAsString(employee);
 

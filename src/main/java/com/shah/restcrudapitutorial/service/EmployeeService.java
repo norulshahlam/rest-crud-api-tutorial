@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import com.shah.restcrudapitutorial.exception.MyConstraintViolationException;
 import com.shah.restcrudapitutorial.model.CountryCount;
 import com.shah.restcrudapitutorial.model.FieldCount;
+import com.shah.restcrudapitutorial.model.dto.EmployeeDto;
 import com.shah.restcrudapitutorial.model.entity.Employee;
 import com.shah.restcrudapitutorial.model.request.EmployeePatch;
 import com.shah.restcrudapitutorial.model.response.OneEmployeeResponse;
@@ -49,18 +50,17 @@ public class EmployeeService {
 	}
 
 	// POST
-	public OneEmployeeResponse post(@Valid Employee employee, BindingResult result) {
+	public OneEmployeeResponse post(@Valid EmployeeDto employeeDto, BindingResult result) {
 
 		// BEFORE IT REACHES DB AND TRIGGER ERROR FOR CONSTRAINTS, WE WILL MANUALLY
 		// TRIGGER IT.
 		if (result.hasErrors()) {
 			throw new MyConstraintViolationException(result);
 		}
-
-		// ID & DATE CREATED IS MANAGED BY JPA. IN CASE USER SETS THIS, REMOVE IT.
-		employee.setId(null);
-		employee.setCreatedAt(null);
-
+		
+		Employee employee = new Employee();
+		BeanUtils.copyProperties(employeeDto, employee);
+		
 		return new OneEmployeeResponse("Employee created!", empRepo.save(employee));
 	}
 

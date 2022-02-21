@@ -6,10 +6,14 @@ import java.util.UUID;
 import javax.validation.Valid;
 
 import com.shah.restcrudapitutorial.model.CountryCount;
+import com.shah.restcrudapitutorial.model.FieldCount;
+import com.shah.restcrudapitutorial.model.dto.EmployeeDto;
 import com.shah.restcrudapitutorial.model.entity.Employee;
 import com.shah.restcrudapitutorial.model.request.EmployeePatch;
 import com.shah.restcrudapitutorial.model.response.OneEmployeeResponse;
 import com.shah.restcrudapitutorial.service.EmployeeService;
+
+import io.swagger.annotations.ApiOperation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,44 +39,48 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping("/all-employees")
+    @ApiOperation(value = "Get all employees", response = Employee.class, tags = "Get all employees")
     public ResponseEntity<List<Employee>> getAllEmployees() {
         return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
     }
-
+    @ApiOperation(value = "Retrieve one employee", response = OneEmployeeResponse.class, tags = "Retrieve one employee")
     @GetMapping("/one-employee/{id}")
     public ResponseEntity<OneEmployeeResponse> getOneEmployee(@PathVariable UUID id) {
             return new ResponseEntity<>
             (employeeService.getOneEmployee(id), HttpStatus.OK);
     }
  
+    @ApiOperation(value = "Add employee", response = OneEmployeeResponse.class, tags = "Add employee")
     @PostMapping("/create-employee")
-    public ResponseEntity<OneEmployeeResponse> newEmployee(@Valid @RequestBody Employee employee, BindingResult result) {
+    public ResponseEntity<OneEmployeeResponse> newEmployee(@Valid @RequestBody EmployeeDto employeeDto, BindingResult result) {
 
-        return new ResponseEntity<>(employeeService.post(employee, result),HttpStatus.CREATED);
+        return new ResponseEntity<>(employeeService.post(employeeDto, result),HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "Edit employee", response = OneEmployeeResponse.class, tags = "Edit employee")
     @PatchMapping("/employee/{id}")
     public ResponseEntity<OneEmployeeResponse> patchEmployee(@PathVariable UUID id, @Valid @RequestBody EmployeePatch fields,
             BindingResult result) {
                 return new ResponseEntity<>( employeeService.patch(id, fields, result), HttpStatus.CREATED);
     }
 
-    
+    @ApiOperation(value = "Delete employee", tags = "Delete employee")
 	@DeleteMapping("/employee/{id}")
 	public ResponseEntity<Object> deleteEmployee(@PathVariable UUID id) {
 		return new ResponseEntity<>(employeeService.deleteEmployee(id), HttpStatus.OK);
 	}
     
 	
-    // COUNT NUMBER OF EACH COUNTRY PRESENT
+    @ApiOperation(value = "Count each country", response = FieldCount.class, tags = "Count each country")
 	@GetMapping("/employees/count/countries")
-	public ResponseEntity<Object> getAllCountryCount() {
+	public ResponseEntity<List<FieldCount>> getAllCountryCount() {
 		return new ResponseEntity<>(employeeService.getAllCountryCount(), HttpStatus.FOUND);
 	}
 
 	
     // COUNT NUMBER OF A COUNTRY
-	@GetMapping("/employees/count/{field}")
+    @ApiOperation(value = "Count one country", response = CountryCount.class, tags = "Count one country")
+    @GetMapping("/employees/count/{field}")
 	public ResponseEntity<List<CountryCount>> getOneCountryCount(@PathVariable String field) {
 		return new ResponseEntity<>(employeeService.getOneCountryCount(field), HttpStatus.FOUND);
 	}

@@ -1,6 +1,6 @@
 # REST CRUD API Tutorials - Creating a CRUD application using REST API
 
-## Version 6 - Swagger
+## Version 6 - [Swagger](https://dzone.com/articles/spring-boot-restful-api-documentation-with-swagger) & Scheduler
 
 Swagger2 is an open source project used to generate the REST API documents for RESTful web services. It provides a user interface to access our RESTful web services via the web browser.
 
