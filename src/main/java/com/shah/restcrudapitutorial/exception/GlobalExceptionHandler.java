@@ -116,25 +116,25 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(e.getMessage(), status);
     }
 }
-
-@Data
-@AllArgsConstructor
-class Message {
-    private final String description;
-    private final HttpStatus status;
-    private final String path;
-    private final String method;
-    private final ZoneId region;
-    private final ZonedDateTime timestamp;
-}
-
-@Data
-@AllArgsConstructor
-class Messages {
-    private final List<String> messageList;
-    private final HttpStatus status;
-    private final String path;
-    private final String method;
-    private final ZoneId region;
-    private final ZonedDateTime timestamp;
-}
+	
+	@Data
+	@AllArgsConstructor
+	class Message {
+	    private final String description;
+	    private final HttpStatus status;
+	    private final String path;
+	    private final String method;
+	    private final ZoneId region;
+	    private final ZonedDateTime timestamp;
+	}
+	
+	@Data
+	@AllArgsConstructor
+	class Messages {
+	    private final List<String> messageList;
+	    private final HttpStatus status;
+	    private final String path;
+	    private final String method;
+	    private final ZoneId region;
+	    private final ZonedDateTime timestamp;
+	}
