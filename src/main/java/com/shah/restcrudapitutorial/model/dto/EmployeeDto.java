@@ -21,7 +21,11 @@ import lombok.Data;
 @Data
 public class EmployeeDto {
 	
-	@ApiModelProperty(notes = "Email address",name="email",required=true,value="abc@email.com",example = "abc@email.com")
+	@ApiModelProperty(notes = "Email address",
+			name="email",required=true,
+			value="abc@email.com",
+			dataType = "String",
+			example = "abcd@email.com")
     @Email(message = "Enter a valid email")
     private String email;
 

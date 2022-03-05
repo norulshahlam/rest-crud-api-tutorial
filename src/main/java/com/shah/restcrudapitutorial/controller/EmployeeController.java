@@ -14,6 +14,9 @@ import com.shah.restcrudapitutorial.model.response.OneEmployeeResponse;
 import com.shah.restcrudapitutorial.service.EmployeeService;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +36,12 @@ import lombok.Data;
 @RequestMapping("/crud-api")
 @Data
 @RestController
+@ApiResponses(value = {
+		@ApiResponse(code = 201, message = "Created"),
+		@ApiResponse(code = 302, message = "Found"),
+		@ApiResponse(code = 404, message = "Not found"),
+		@ApiResponse(code = 400, message = "Bad Request"),
+		@ApiResponse(code = 500, message = "Service Unavaliable")})
 public class EmployeeController {
 
     @Autowired
@@ -45,7 +54,9 @@ public class EmployeeController {
     }
     @ApiOperation(value = "Retrieve one employee", response = OneEmployeeResponse.class, tags = "Retrieve one employee")
     @GetMapping("/one-employee/{id}")
-    public ResponseEntity<OneEmployeeResponse> getOneEmployee(@PathVariable UUID id) {
+    public ResponseEntity<OneEmployeeResponse> getOneEmployee(
+    		@ApiParam(defaultValue = "001d846e-4488-4ecc-84c2-9b6f1d130711")
+    		@PathVariable UUID id) {
             return new ResponseEntity<>
             (employeeService.getOneEmployee(id), HttpStatus.OK);
     }

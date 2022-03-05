@@ -28,6 +28,29 @@ You just need to have one class for this config and you will do all the necessar
 
     spring.mvc.pathmatch.matching-strategy=ant-path-matcher
 
+`What to implement?`
+
+Docket - Your configurations and useful information
+- Api information like name, contact, versrion
+- Request header like application/json, request id, request datme/time
+
+@ApiResonses
+- Describes a possible response of an operation. 
+- Defined at controller level or application level
+
+@ApiOperation
+- Describes an operation or typically a HTTP method against a specific path
+- Defined on every controller method
+
+@ApiParam
+- Describes a parameters of an API resource request
+- You give a sample value on the request parameter
+- Defined on every controller method
+
+@ApiModelProperty
+- control Swagger-specific definitions such as description (value), name, data type, example values on your model
+
+
 `Accessing Swagger`
 
 You can access it in JSON-based or UI-based. These two have their default url. You can, of course customize this.

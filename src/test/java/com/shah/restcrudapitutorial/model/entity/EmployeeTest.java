@@ -4,9 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
@@ -70,42 +73,14 @@ class EmployeeTest {
 		
 		Employee object = new Employee();
 		Employee object2 = new Employee();
-		assertThat(object).isEqualTo(object2);
+		assertThat(object).isEqualTo(object2).isInstanceOf(object2.getClass());
+//		assertTrue(object.equals(object2) && object2.equals(object));
+//		assertNotEquals(null,object);
+//		assertThat(object.hashCode()).hasSameHashCodeAs(object2);
+//		 Map<Employee, String> map = new HashMap<>();
+//		    map.put(object, "dummy");
+//		    assertEquals("dummy",map.get(object));
 	}
 	
 	
-	@Test
-	void testClone() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testNotify() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testNotifyAll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testWait() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testWaitLong() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testWaitLongInt() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testFinalize() {
-		fail("Not yet implemented");
-	}
 }
