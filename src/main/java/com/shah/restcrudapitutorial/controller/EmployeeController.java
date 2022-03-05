@@ -42,6 +42,7 @@ import lombok.Data;
 		@ApiResponse(code = 404, message = "Not found"),
 		@ApiResponse(code = 400, message = "Bad Request"),
 		@ApiResponse(code = 500, message = "Service Unavaliable")})
+
 public class EmployeeController {
 
     @Autowired
@@ -63,14 +64,16 @@ public class EmployeeController {
  
     @ApiOperation(value = "Add employee", response = OneEmployeeResponse.class, tags = "Add employee")
     @PostMapping("/create-employee")
-    public ResponseEntity<OneEmployeeResponse> newEmployee(@Valid @RequestBody EmployeeDto employeeDto, BindingResult result) {
+    public ResponseEntity<OneEmployeeResponse> newEmployee(
+    		@Valid @RequestBody EmployeeDto employeeDto, BindingResult result) {
 
         return new ResponseEntity<>(employeeService.post(employeeDto, result),HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Edit employee", response = OneEmployeeResponse.class, tags = "Edit employee")
     @PatchMapping("/employee/{id}")
-    public ResponseEntity<OneEmployeeResponse> patchEmployee(@PathVariable UUID id, @Valid @RequestBody EmployeePatch fields,
+    public ResponseEntity<OneEmployeeResponse> patchEmployee(
+    		@PathVariable UUID id, @Valid @RequestBody EmployeePatch fields,
             BindingResult result) {
                 return new ResponseEntity<>( employeeService.patch(id, fields, result), HttpStatus.CREATED);
     }

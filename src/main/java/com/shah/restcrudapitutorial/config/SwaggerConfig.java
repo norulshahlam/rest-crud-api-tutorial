@@ -47,7 +47,7 @@ public class SwaggerConfig {
     			.title("REST API CRUD operations")
     			.contact(contact())
     			.license("License number WWE87ASR4GH")
-    			.termsOfServiceUrl("Licensed by your mother")
+    			.termsOfServiceUrl("https://swagger.io/docs/specification/api-general-info/")
     			.version("1.0")
     			.build();
     }
