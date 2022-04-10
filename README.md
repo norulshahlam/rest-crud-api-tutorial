@@ -100,6 +100,10 @@ It is always an advantage to know what your cron expression value is by using Cr
         <version>3.5</version>
     </dependency>
 
+Not sure what expression to use? Click [here](https://www.freeformatter.com/cron-expression-generator-quartz.html) to generate expression online
+
+
+
 Method name: 
 
     static net.redhogs.cronparser.CronExpressionDescriptor
