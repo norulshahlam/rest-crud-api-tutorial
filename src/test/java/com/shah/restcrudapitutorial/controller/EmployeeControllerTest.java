@@ -1,6 +1,7 @@
 package com.shah.restcrudapitutorial.controller;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,8 +26,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.validation.BindingResult;
@@ -73,7 +76,7 @@ class EmployeeControllerTest {
   void testGetAllEmployees() throws Exception {
     when(employeeService.getAllEmployees()).thenReturn(employees);
 
-    mockMvc.perform(get("/all-employees")
+    mockMvc.perform(get("/crud-api/all-employees")
         .accept(MediaType.APPLICATION_JSON))
         .andDo(print())
         .andExpect(status().isOk())
@@ -87,15 +90,17 @@ class EmployeeControllerTest {
 
     UUID uuid = oneEmployeeResponse.getEmployee().getId();
 
-    when(employeeService.getOneEmployee(uuid)).thenReturn(oneEmployeeResponse);
+    when(employeeService.getOneEmployee(any())).thenReturn(oneEmployeeResponse);
 
-    mockMvc.perform(get("/one-employee/{uuid}", uuid)
+    this.mockMvc.perform(get("/crud-api/one-employee/{uuid}", uuid)
         .contentType(MediaType.APPLICATION_JSON))
         .andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.employee.id")
             .value(uuid.toString()));
   }
+  
+	
 
   @Test
   void testNewEmployee() throws Exception {
@@ -104,7 +109,7 @@ class EmployeeControllerTest {
         .thenReturn(oneEmployeeResponse);
         String content = objectMapper.writeValueAsString(employee);
 
-    mockMvc.perform(post("/create-employee")
+    mockMvc.perform(post("/crud-api/create-employee")
         .contentType(MediaType.APPLICATION_JSON)
         .content(content))
         .andDo(print())

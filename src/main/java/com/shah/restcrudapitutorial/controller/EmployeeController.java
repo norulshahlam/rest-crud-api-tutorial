@@ -53,13 +53,13 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> getAllEmployees() {
         return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
     }
+    
     @ApiOperation(value = "Retrieve one employee", response = OneEmployeeResponse.class, tags = "Retrieve one employee")
     @GetMapping("/one-employee/{id}")
     public ResponseEntity<OneEmployeeResponse> getOneEmployee(
     		@ApiParam(defaultValue = "001d846e-4488-4ecc-84c2-9b6f1d130711")
     		@PathVariable UUID id) {
-            return new ResponseEntity<>
-            (employeeService.getOneEmployee(id), HttpStatus.OK);
+            return new ResponseEntity<>(employeeService.getOneEmployee(id), HttpStatus.OK);
     }
  
     @ApiOperation(value = "Add employee", response = OneEmployeeResponse.class, tags = "Add employee")

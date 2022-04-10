@@ -1,8 +1,45 @@
 # REST CRUD API Tutorials - Creating a CRUD application using REST API
 
-## Version 6 - [Swagger](https://dzone.com/articles/spring-boot-restful-api-documentation-with-swagger) & Scheduler
+## Version 6 - [Swagger](https://dzone.com/articles/spring-boot-restful-api-documentation-with-swagger) & [Scheduler](https://www.baeldung.com/spring-scheduled-tasks) 
 
-Swagger2 is an open source project used to generate the REST API documents for RESTful web services. It provides a user interface to access our RESTful web services via the web browser.
+### Scheduler
+
+Scheduling is a process of executing the tasks for the specific time period. Spring Boot provides a good support to write a scheduler on the Spring applications.
+
+- @Configuration & @EnableScheduling
+
+Use this 2 annotations on the class where the scheduled method in running on.
+
+- @Scheduled
+
+Use this on the method where the scheduler is running. on top of that, you can set the interval using cron or time units eg
+
+@Scheduled(fixedDelay = 1000)
+@Scheduled(fixedRate = 1000)
+@Scheduled(fixedDelay = 1000, initialDelay = 1000)
+@Scheduled(cron = "0 15 10 15 * ?")
+@Scheduled(cron = "0 15 10 15 * ?", zone = "Europe/Paris")
+
+- Cron Expression
+
+It is always an advantage to know what your cron expression value is by using CronParser
+
+	<!-- https://mvnrepository.com/artifact/net.redhogs.cronparser/cron-parser-spring -->
+    <dependency>
+        <groupId>net.redhogs.cronparser</groupId>
+        <artifactId>cron-parser-spring</artifactId>
+        <version>3.5</version>
+    </dependency>
+
+Method name: 
+
+    static net.redhogs.cronparser.CronExpressionDescriptor
+        .getDescription(0 15 10 15 * ?);
+
+
+### Swagger2 
+
+An open source project used to generate the REST API documents for RESTful web services. It provides a user interface to access our RESTful web services via the web browser.
 
 To enable the Swagger2 in Spring Boot application, you need to add the following dependencies in our build configurations file:
 
@@ -48,7 +85,7 @@ Docket - Your configurations and useful information
 - Defined on every controller method
 
 @ApiModelProperty
-- control Swagger-specific definitions such as description (value), name, data type, example values on your model
+- Define your model description (value), name, data type, example values on your model
 
 
 `Accessing Swagger`

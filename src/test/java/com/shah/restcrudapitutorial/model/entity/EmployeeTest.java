@@ -18,11 +18,6 @@ class EmployeeTest {
 	
 	
 	@Test
-	void testHashCode() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	void testBuilder() {
 
 		Employee build = Employee.builder()
@@ -40,7 +35,6 @@ class EmployeeTest {
 				.build();
 		Employee.builder().toString();
 		assertThat(build).isNotNull();
-		
 		
 	}
 
