@@ -26,11 +26,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Generated;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @JsonPropertyOrder({"firstName","lastName"})
 @Builder
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

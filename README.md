@@ -1,40 +1,6 @@
 # REST CRUD API Tutorials - Creating a CRUD application using REST API
 
-## Version 6 - [Swagger](https://dzone.com/articles/spring-boot-restful-api-documentation-with-swagger) & [Scheduler](https://www.baeldung.com/spring-scheduled-tasks) 
-
-### Scheduler
-
-Scheduling is a process of executing the tasks for the specific time period. Spring Boot provides a good support to write a scheduler on the Spring applications.
-
-- @Configuration & @EnableScheduling
-
-Use this 2 annotations on the class where the scheduled method in running on.
-
-- @Scheduled
-
-Use this on the method where the scheduler is running. on top of that, you can set the interval using cron or time units eg
-
-@Scheduled(fixedDelay = 1000)
-@Scheduled(fixedRate = 1000)
-@Scheduled(fixedDelay = 1000, initialDelay = 1000)
-@Scheduled(cron = "0 15 10 15 * ?")
-@Scheduled(cron = "0 15 10 15 * ?", zone = "Europe/Paris")
-
-- Cron Expression
-
-It is always an advantage to know what your cron expression value is by using CronParser
-
-	<!-- https://mvnrepository.com/artifact/net.redhogs.cronparser/cron-parser-spring -->
-    <dependency>
-        <groupId>net.redhogs.cronparser</groupId>
-        <artifactId>cron-parser-spring</artifactId>
-        <version>3.5</version>
-    </dependency>
-
-Method name: 
-
-    static net.redhogs.cronparser.CronExpressionDescriptor
-        .getDescription(0 15 10 15 * ?);
+## Version 6 - [Swagger](https://dzone.com/articles/spring-boot-restful-api-documentation-with-swagger), [Scheduler](https://www.baeldung.com/spring-scheduled-tasks), [Initiliazer](https://www.baeldung.com/running-setup-logic-on-startup-in-spring)
 
 
 ### Swagger2 
@@ -99,6 +65,67 @@ JSON-based
 UI-based
 
     http://localhost:9090/swagger-ui.html
+
+Demo file:
+
+    /rest-crud-api-tutorial/src/main/java/com/shah/restcrudapitutorial/config/SwaggerConfig.java
+
+
+### Scheduler
+
+Scheduling is a process of executing the tasks for the specific time period. Spring Boot provides a good support to write a scheduler on the Spring applications.
+
+- @Configuration & @EnableScheduling
+
+Use this 2 annotations on the class where the scheduled method in running on.
+
+- @Scheduled
+
+Use this on the method where the scheduler is running. on top of that, you can set the interval using cron or time units eg
+
+@Scheduled(fixedDelay = 1000)
+@Scheduled(fixedRate = 1000)
+@Scheduled(fixedDelay = 1000, initialDelay = 1000)
+@Scheduled(cron = "0 15 10 15 * ?")
+@Scheduled(cron = "0 15 10 15 * ?", zone = "Europe/Paris")
+
+- Cron Expression
+
+It is always an advantage to know what your cron expression value is by using CronParser
+
+	<!-- https://mvnrepository.com/artifact/net.redhogs.cronparser/cron-parser-spring -->
+    <dependency>
+        <groupId>net.redhogs.cronparser</groupId>
+        <artifactId>cron-parser-spring</artifactId>
+        <version>3.5</version>
+    </dependency>
+
+Method name: 
+
+    static net.redhogs.cronparser.CronExpressionDescriptor
+        .getDescription(0 15 10 15 * ?);
+
+Demo file:
+
+    /rest-crud-api-tutorial/src/main/java/com/shah/restcrudapitutorial/scheduler/MyScheduler.java
+
+### Initializer
+
+How to run logic at the startup of a Spring application? There many ways to achieve this:
+1. @PostConstruct Annotation
+2. _InitializingBean_ Interface
+3. _ApplicationListener_
+4. _@Bean initMethod_ Attribute
+5. Constructor Injection
+6. _CommandLineRunner_
+7. _ApplicationRunner_
+8. Combining any combination above
+
+For simplicity we will demo using _CommandLineRunner_
+
+Spring Boot provides a _CommandLineRunner_ interface with a callback _run()_ method. This can be invoked at application startup after the Spring application context is instantiated.
+
+    demo file: /rest-crud-api-tutorial/src/main/java/com/shah/restcrudapitutorial/startup/MyStartup.java
 
 ## Version 5 - Unit Testing
 
